@@ -12,6 +12,6 @@ public class TesteListOrde {
         listNome.add("Rafael");
 
         Collections.sort(listNome);
-        System.out.println(listNome);
+        listNome.forEach(System.out::println);
     }
 }
