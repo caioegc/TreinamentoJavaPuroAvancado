@@ -15,7 +15,7 @@ class barcoOrder implements Comparator<Barco>{
 
 public class AnonimaClasse02 {
     public static void main(String[] args) {
-        List<Barco> barcoList = new ArrayList<>(List.of(new Barco("Canoa"), new Barco("Lancha"), new Barco("Barco a vela")));
+        List<Barco> barcoList = new ArrayList<>(List.of(new Barco("Canoa", "Verde"), new Barco("Lancha"), new Barco("Barco a vela")));
         barcoList.sort(new Comparator<Barco>(){
             @Override
             public int compare(Barco o1, Barco o2) {

@@ -2,9 +2,15 @@ package br.com.caio.generics.dominio;
 
 public class Barco {
     private String nome;
+    private String cor;
 
     public Barco(String nome) {
         this.nome = nome;
+    }
+
+    public Barco(String nome, String cor) {
+        this.nome = nome;
+        this.cor = cor;
     }
 
     public String getNome() {
@@ -15,10 +21,19 @@ public class Barco {
         this.nome = nome;
     }
 
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
     @Override
     public String toString() {
         return "Barco{" +
                 "nome='" + nome + '\'' +
+                ", cor='" + cor + '\'' +
                 '}';
     }
 }
