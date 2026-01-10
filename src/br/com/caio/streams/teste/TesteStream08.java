@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TesteStream02 {
+public class TesteStream08 {
 
     private static List<Animes> animesList = new ArrayList<>(List.of(
             new Animes("Naruto", 10),
@@ -20,14 +20,19 @@ public class TesteStream02 {
 
     public static void main(String[] args) {
 
-       animesList.stream()
-                .sorted(Comparator.comparing(Animes::getTitulo)) //ordenar
-                .filter(ln -> ln.getPreco() <= 10) //filtrar
-                .limit(3) //limitar
-                .map(Animes::getTitulo)
-                .collect(Collectors.toList());
+      animesList.stream()
+              .map(Animes::getPreco)
+              .filter(p -> p > 8)
+              .reduce(Double::sum)
+              .ifPresent(System.out::println);
 
-        System.out.println(animesList);
+
+     Double soma =   animesList.stream()
+              .mapToDouble(Animes::getPreco)
+             .filter(p -> p > 8)
+              .sum();
+
+        System.out.println(soma);
 
     }
 }

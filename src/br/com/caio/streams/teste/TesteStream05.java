@@ -5,9 +5,9 @@ import br.com.caio.streams.dominio.Animes;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class TesteStream02 {
+public class TesteStream05 {
 
     private static List<Animes> animesList = new ArrayList<>(List.of(
             new Animes("Naruto", 10),
@@ -19,15 +19,22 @@ public class TesteStream02 {
     ));
 
     public static void main(String[] args) {
+        Stream<Animes> animesStream = animesList.stream();
+        animesList.forEach(System.out::println);
 
-       animesList.stream()
-                .sorted(Comparator.comparing(Animes::getTitulo)) //ordenar
-                .filter(ln -> ln.getPreco() <= 10) //filtrar
-                .limit(3) //limitar
-                .map(Animes::getTitulo)
-                .collect(Collectors.toList());
+       long i = animesStream.filter(a -> a.getPreco() <=10).count();
+       long d = animesList.stream()
+                       .distinct() //duplicados
+                       .filter(a -> a.getPreco() <= 10)
+                       .count();
 
-        System.out.println(animesList);
+
+        System.out.println(i);
+        System.out.println(d);
+
 
     }
+
+
+
 }

@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TesteStream02 {
+public class TesteStream04 {
 
     private static List<Animes> animesList = new ArrayList<>(List.of(
             new Animes("Naruto", 10),
@@ -19,15 +19,17 @@ public class TesteStream02 {
     ));
 
     public static void main(String[] args) {
-
-       animesList.stream()
-                .sorted(Comparator.comparing(Animes::getTitulo)) //ordenar
-                .filter(ln -> ln.getPreco() <= 10) //filtrar
-                .limit(3) //limitar
+        List<String> anime = animesList.stream()
+                .sorted(Comparator.comparing(Animes::getTitulo))
+                .filter(a-> a.getPreco() <=10)
                 .map(Animes::getTitulo)
-                .collect(Collectors.toList());
+                .limit(3)
+                .toList();
 
-        System.out.println(animesList);
+        System.out.println(anime);
 
     }
+
+
+
 }
