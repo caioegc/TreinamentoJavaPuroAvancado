@@ -4,13 +4,10 @@ import br.com.caio.streams.dominio.Animes;
 import br.com.caio.streams.dominio.Categoria;
 import br.com.caio.streams.dominio.Promocao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class TesteStream11 {
+public class TesteStream12 {
     private static List<Animes> animesList = new ArrayList<>(List.of(
             new Animes("Naruto", 10, Categoria.ROMANCE),
             new Animes("DeathNoth", 5.50, Categoria.DRAMA),
@@ -22,13 +19,12 @@ public class TesteStream11 {
 
 
     public static void main(String[] args) {
-        Map<Promocao, List<Animes>> collect = animesList.stream().collect(Collectors.groupingBy(a -> a.getPreco() < 5 ? Promocao.PRECO_PROMOCIONAL : Promocao.PRECO_NORMAL));
-
+        Map<Categoria, Long> collect = animesList.stream().collect(Collectors.groupingBy(Animes::getCategoria, Collectors.counting()));
         System.out.println(collect);
-
-        Map<Categoria, Map<Promocao, List<Animes>>> collect1 = animesList.stream().collect(Collectors.groupingBy(Animes::getCategoria, Collectors.groupingBy(a -> a.getPreco() < 5 ? Promocao.PRECO_PROMOCIONAL : Promocao.PRECO_NORMAL))
-        );
+        Map<Categoria, Optional<Animes>> collect1 = animesList.stream().collect(Collectors.groupingBy(Animes::getCategoria, Collectors.maxBy(Comparator.comparing(Animes::getPreco))));
         System.out.println(collect1);
+        Map<Categoria, Animes> collect2 = animesList.stream().collect(Collectors.groupingBy(Animes::getCategoria, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparing(Animes::getPreco)), Optional::get)));
+        System.out.println(collect2);
     }
 
     }
